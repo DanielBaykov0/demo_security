@@ -5,6 +5,7 @@ import baykov.daniel.security.app.payload.dto.RegisterDto;
 import baykov.daniel.security.app.payload.response.JWTAuthenticationResponse;
 import baykov.daniel.security.app.service.AuthenticationService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("api/v1/auth")
 public class AuthenticationController {
@@ -33,7 +35,7 @@ public class AuthenticationController {
 
 //    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register(@RequestBody @Valid RegisterDto registerDto){
+    public ResponseEntity<String> register(@Valid @RequestBody RegisterDto registerDto){
         String response = authService.register(registerDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

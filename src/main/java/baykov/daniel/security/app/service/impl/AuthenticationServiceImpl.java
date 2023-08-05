@@ -49,18 +49,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public String register(RegisterDto registerDto) {
-        if (userRepository.existsByEmail(registerDto.email())) {
-            throw new SecurityAPIException(HttpStatus.BAD_REQUEST, Messages.USERNAME_EXISTS);
-        }
-
-        if (userRepository.existsByEmail(registerDto.email())) {
+        if (userRepository.existsByEmailIgnoreCase(registerDto.email())) {
             throw new SecurityAPIException(HttpStatus.BAD_REQUEST, Messages.EMAIL_EXISTS);
         }
 
+        User user = buildUser(registerDto);
+        userRepository.save(user);
+        return Messages.USER_SUCCESSFULLY_REGISTERED;
+    }
+
+    private User buildUser(RegisterDto registerDto) {
         User user = new User();
         user.setFirstName(registerDto.firstName());
         user.setLastName(registerDto.lastName());
         user.setPassword(passwordEncoder.encode(registerDto.password()));
+        user.setMatchingPassword(passwordEncoder.encode(registerDto.matchingPassword()));
         user.setEmail(registerDto.email());
 
         Set<Role> roles = new HashSet<>();
@@ -71,8 +74,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         roles.add(role);
         user.setRoles(roles);
-
-        userRepository.save(user);
-        return Messages.USER_SUCCESSFULLY_REGISTERED;
+        return user;
     }
 }
