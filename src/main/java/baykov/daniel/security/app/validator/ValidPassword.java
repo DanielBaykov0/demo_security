@@ -10,16 +10,15 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({TYPE, FIELD, ANNOTATION_TYPE})
-@Retention(RUNTIME)
-@Constraint(validatedBy = PasswordMatchesValidator.class)
 @Documented
-public @interface PasswordMatches {
+@Constraint(validatedBy = PasswordConstraintValidator.class)
+@Target({ TYPE, FIELD, ANNOTATION_TYPE })
+@Retention(RUNTIME)
+public @interface ValidPassword {
 
-    String message() default "Those passwords didn’t match. Please try again";
+    String message() default "Your password must have at least 8 characters, with a mix of uppercase, lowercase, numbers and symbols";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }

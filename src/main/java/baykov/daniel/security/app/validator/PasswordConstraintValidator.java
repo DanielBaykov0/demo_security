@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, String> {
+public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
