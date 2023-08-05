@@ -15,7 +15,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 		PasswordValidator validator = new PasswordValidator(
 				Arrays.asList(
 						// at least 8 characters
-						new LengthRule(8, 30),
+						new LengthRule(8, 100),
 
 						// at least one upper-case character
 						new CharacterRule(EnglishCharacterData.UpperCase, 1),

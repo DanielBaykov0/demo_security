@@ -5,7 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Generated;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -32,8 +36,16 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private String matchingPassword;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Generated
+    @ColumnDefault(value = "false")
+    private Boolean isActive;
+
+    @Generated
+    @ColumnDefault(value = "false")
+    private Boolean isVerified;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",

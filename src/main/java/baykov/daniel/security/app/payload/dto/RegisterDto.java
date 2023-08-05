@@ -7,26 +7,27 @@ import jakarta.validation.constraints.Size;
 
 public record RegisterDto(
 
-        @NotEmpty(message = "First Name should not be null or empty")
-        @Size(min = 2, message = "Name should have at least 2 characters")
+        @NotEmpty(message = "Please enter a first name")
+        @Size(min = 2, max = 50, message = "First name must be less than 50 characters long")
         String firstName,
 
-        @NotEmpty(message = "Last Name should not be null or empty")
-        @Size(min = 2, message = "Name should have at least 2 characters")
+        @NotEmpty(message = "Please enter a last name")
+        @Size(min = 2, max = 50, message = "Last name must be less than 50 characters long")
         String lastName,
 
-        @NotEmpty(message = "Password should not be null or empty")
-        @Size(min = 8, max = 20, message = "Password should be between 8 and 20 characters")
+        @NotEmpty(message = "Please enter a password")
+        @Size(min = 8, message = "Password must be at least 8 characters long")
+        @Size(max = 100, message = "Password must be less than 100 characters long")
         @PasswordMatches
         String password,
 
-        @NotEmpty(message = "Matching Password should not be null or empty")
-        @Size(min = 8, max = 20, message = "Matching Password should be between 8 and 20 characters")
+        @NotEmpty(message = "Please enter a matching password")
+        @Size(min = 8, max = 100, message = "Matching Password should be between 8 and 20 characters")
         @PasswordMatches
         String matchingPassword,
 
-        @NotEmpty(message = "Email should not be null or empty")
-        @Email
+        @NotEmpty(message = "Please enter an email address")
+        @Email(message = "Please enter a valid email address")
         String email
 ) {
 }

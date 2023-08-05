@@ -63,7 +63,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setFirstName(registerDto.firstName());
         user.setLastName(registerDto.lastName());
         user.setPassword(passwordEncoder.encode(registerDto.password()));
-        user.setMatchingPassword(passwordEncoder.encode(registerDto.matchingPassword()));
         user.setEmail(registerDto.email());
 
         Set<Role> roles = new HashSet<>();
