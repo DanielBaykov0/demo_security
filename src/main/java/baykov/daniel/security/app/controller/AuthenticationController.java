@@ -24,7 +24,7 @@ public class AuthenticationController {
         this.authService = authService;
     }
 
-//    @PreAuthorize("hasRole('ADMIN')")
+
     @PostMapping(value = {"/login", "/signin"})
     public ResponseEntity<JWTAuthenticationResponse> login(@Valid @RequestBody LoginDto loginDto) {
         String token = authService.login(loginDto);
@@ -33,7 +33,6 @@ public class AuthenticationController {
         return ResponseEntity.ok(response);
     }
 
-//    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = {"/register", "/signup"})
     public ResponseEntity<String> register(@Valid @RequestBody RegisterDto registerDto){
         String response = authService.register(registerDto);

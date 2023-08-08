@@ -41,10 +41,6 @@ public class User {
 
     @Generated
     @ColumnDefault(value = "false")
-    private Boolean isActive;
-
-    @Generated
-    @ColumnDefault(value = "false")
     private Boolean isVerified;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
